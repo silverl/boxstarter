@@ -1,2 +1,2 @@
 # boxstarter
-My boxstarter configs
+My boxstarter script/configs
