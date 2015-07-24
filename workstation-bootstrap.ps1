@@ -54,6 +54,6 @@ cinst WinPcap
 cinst wireshark
 cinst wizmouse
 
-#Turn off Aero Shake
+#Turn off Aero Shake - Must sign out/in for this to take effect.
 New-Item -Path HKCU:\Software\Policies\Microsoft\Windows\Explorer
 Set-ItemProperty HKCU:\Software\Policies\Microsoft\Windows\Explorer NoWindowMinimizingShortcuts 1
