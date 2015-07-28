@@ -10,6 +10,7 @@ cinst ccleaner
 cinst chefdk
 cinst ChocolateyGUI
 cinst clink
+cinst clover
 cinst conemu
 cinst cpu-z
 cinst CrashPlan
