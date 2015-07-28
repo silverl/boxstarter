@@ -45,6 +45,7 @@ cinst skype
 cinst slack
 cinst SourceTree
 cinst SublimeText3
+cinst SublimeText3.PackageControl
 cinst sysinternals
 cinst Teamspeak3
 cinst tortoisehg
@@ -53,9 +54,20 @@ cinst vlc
 cinst windirstat
 cinst winmerge
 cinst WinPcap
+# Provides makecert.exe utility
+cinst windows-sdk-7.1
 cinst wireshark
 cinst wizmouse
 
 #Turn off Aero Shake - Must sign out/in for this to take effect.
 New-Item -Path HKCU:\Software\Policies\Microsoft\Windows\Explorer
 Set-ItemProperty HKCU:\Software\Policies\Microsoft\Windows\Explorer NoWindowMinimizingShortcuts 1
+
+# Install SublimeText Powershell syntax highlighting
+$sublimePackagesPath=Join-Path $env:AppData "Sublime Text 3\Packages"
+$target=Join-Path $env:TEMP "PowerShell"
+if (Test-Path $target) { Remove-Item -Recurse -Force $target }
+cd $env:TEMP
+# This command makes noise, but it can be ignored. See https://github.com/dahlbyk/posh-git/issues/109
+git clone https://github.com/SublimeText/PowerShell
+Move-Item $target $sublimePackagesPath
