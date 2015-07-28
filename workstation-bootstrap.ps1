@@ -33,6 +33,7 @@ cinst keepass.portable
 cinst lastpass
 cinst lastpass-for-applications
 cinst licecap
+cinst listary
 cinst logmein-rescue-console-desktop
 cinst paint.net
 cinst putty
