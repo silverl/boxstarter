@@ -59,6 +59,7 @@ cinst WinPcap
 cinst windows-sdk-7.1
 cinst wireshark
 cinst wizmouse
+cinst wget
 
 #Turn off Aero Shake - Must sign out/in for this to take effect.
 New-Item -Path HKCU:\Software\Policies\Microsoft\Windows\Explorer
@@ -72,3 +73,7 @@ cd $env:TEMP
 # This command makes noise, but it can be ignored. See https://github.com/dahlbyk/posh-git/issues/109
 git clone https://github.com/SublimeText/PowerShell
 Move-Item $target $sublimePackagesPath
+
+# Configure greenshot
+cd C:\Users\$env:USERNAME\AppData\Roaming\Greenshot
+Invoke-WebRequest "https://raw.githubusercontent.com/silverl/boxstarter/master/greenshot-fixed.ini" -OutFile greenshot-fixed.ini
