@@ -28,6 +28,7 @@ cinst git.install
 cinst google-chrome-x64
 cinst googledrive
 cinst greenshot
+cinst OptiPNG
 cinst handbrake
 cinst hexchat
 cinst keepass.portable
