@@ -2,6 +2,9 @@ Set-ExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFi
 Install-WindowsUpdate  -acceptEula
 Update-ExecutionPolicy RemoteSigned
 Enable-RemoteDesktop
+
+Enable-WindowsOptionalFeature -Online -FeatureName MSMQ-Server -All
+
 cinst 7zip
 cinst adb
 cinst autohotkey
@@ -75,5 +78,20 @@ git clone https://github.com/SublimeText/PowerShell
 Move-Item $target $sublimePackagesPath
 
 # Configure greenshot
-cd C:\Users\$env:USERNAME\AppData\Roaming\Greenshot
-Invoke-WebRequest "https://raw.githubusercontent.com/silverl/boxstarter/master/greenshot-fixed.ini" -OutFile greenshot-fixed.ini
+$greenshotconfig = "C:\Users\$env:USERNAME\AppData\Roaming\Greenshot\greenshot-fixed.ini"
+# Dealing with wonky line endings when pulling from github.
+$tempgreenshot = [System.IO.Path]::GetTempFileName()
+Invoke-WebRequest "https://raw.githubusercontent.com/silverl/boxstarter/master/greenshot-fixed.ini" -OutFile $tempgreenshot
+Get-Content $tempgreenshot | Set-Content -Path $greenshotconfig
+
+# Configure git
+git config --global credential.helper wincred
+
+
+# Configure workstation for WinRM remote management
+# start WinRM service
+Start-Service WinRM
+# enable the local account token filter policy
+Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name LocalAccountTokenFilterPolicy -Value 1 -Type DWord
+# now you can add all computers to your TrustedHosts list
+Set-Item WSMan:\localhost\Client\TrustedHosts  -Value "*"
